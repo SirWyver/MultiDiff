@@ -137,7 +137,8 @@
 
                 </script>
                 <h2 class=" subtitle has-text-centered">
-                    <span class="dnerf">DiffRF</span>
+                    <span class="dnerf">DiffRF</span> is a denoising diffusion probabilistic model directly operating on 3D radiance fields and trained with an additional volumetric rendering loss. 
+                    This enables learning strong radiance priors with high rendering quality and accurate geometry.
                 </h2>
 
 
@@ -249,9 +250,7 @@
             <h3 class="title is-4">Radiance Field Synthesis</h3>
             <div class="content has-text-justified">
                 <p>
-                    <span class="dnerf">AutoRF</span> naturally disentangles object shape, appearance and pose. This
-                    allows to control each property individually while freely moving the camera leading to the first
-                    ever implicitly reverse-parked car.
+                   Our 3D denoising diffusion probabilistic model learns to synthesize diverse radiance fields that enable high-quality rendering with accurate geometry.
                 </p>
             </div>
             <div class="colums is-centered">
@@ -296,6 +295,8 @@
 
             <!-- Masked completion -->
             <h3 class="title is-4">3D Masked Completion</h3>
+            <span class="dnerf">DiffRF</span> naturally enables 3D masked completion: Given a 3D mask (of arbitrary shape), the goal is to synthesize a completion of the masked region that harmonizes with the non-masked area.
+            We observe that our model produces diverse and matching completions.
             <div class="content has-text-justified">
                 <p>
 
@@ -317,13 +318,14 @@
 
             <!-- Image to volume Synthesis -->
             <h3 class="title is-4">Image-to-Volume Synthesis</h3>
+            Given a posed (relative to the 3D bounded box), foreground-segmented image, we can guide the sampling process simultaneously minimizing the photometric rendering error. This leads to plausible radiance field proposals.
             <div class="content has-text-justified">
                 <p>
 
                 </p>
             </div>
             <div class="content has-text-centered">
-                <video id="real0" autoplay muted loop width="49%">
+                <video id="real0" autoplay muted loop width="90%">
                     <source src="static/real/real0.mov" type="video/mp4">
                 </video>
                 <script>
@@ -332,7 +334,7 @@
 
                 </script>
 
-                <video id="real1" autoplay muted loop width="49%">
+                <video id="real1" autoplay muted loop width="90%">
                     <source src="static/real/real1.mov" type="video/mp4">
                 </video>
                 <script>
@@ -348,7 +350,7 @@
             <h3 class="title is-4">Asset generation for scenes</h3>
             <div class="content has-text-justified">
                 <p>
-
+                    We see future applications of our radiance field diffusion method in the generation of scene assets. 
                 </p>
             </div>
             <div class="content has-text-centered">
@@ -372,7 +374,7 @@
                 <div class="column is-full-width">
                     <h2 class="title is-3">Related Links</h2>
 
-                    <div class="content has-text-justified">
+                    <!-- <div class="content has-text-justified">
                         <p>
                             For more work on similar tasks, please check out
                         </p>
@@ -397,7 +399,7 @@
                                 href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's
                                 curated list of NeRF papers</a>.
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!--/ Concurrent Work. -->
@@ -407,7 +409,7 @@
 
 
     <section class="section" id="BibTeX">
-        <div class="container is-max-desktop content">
+        <!-- <div class="container is-max-desktop content">
             <h2 class="title">BibTeX</h2>
             <pre><code>@inproceedings{mueller2022autorf,
   author    = {M{\"{u}}ller, Norman and Simonelli, Andrea and Porzi, Lorenzo and Bulò, Samuel Rota and Nie{\ss}ner, Matthias and Kontschieder, Peter}},
@@ -415,7 +417,7 @@
   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   month     = {June},
   year      = {2022}}</code></pre>
-        </div>
+        </div> -->
     </section>
 
 
