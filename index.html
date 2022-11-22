@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Rendering-guided 3D Radiance Field Diffusion">
+    <meta name="keywords" content="DiffRF, Diffusion, 3D, Radiance Fields, NeRF, 3D Object">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DiffRF: Rendering-guided 3D Radiance Field Diffusion</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="icon" href="static/method/diffrf_icon.gif" type="image/gif" />
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">DiffRF: Rendering-guided 3D Radiance Field Diffusion
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://niessnerlab.org/members/norman_mueller/profile.html">Norman
+                                    Müller</a><sup>1,2</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://niessnerlab.org/members/yawar_siddiqui/profile.html">Yawar
+                                    Siddiqui</a><sup>1,2</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=vW1gaVEAAAAJ">Lorenzo
+                                    Porzi</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?hl=de&user=484sccEAAAAJ">Samuel Rota
+                                    Bulò</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=CxbDDRMAAAAJ&hl=en">Peter
+                                    Kontschieder</a><sup>2</sup>
+                            </span>
+                            <span class="author-block">
+                                <a href="https://niessnerlab.org/members/matthias_niessner/profile.html">Matthias
+                                    Nießner</a><sup>1</sup>,
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
+                            <span class="author-block"><sup>2</sup>Meta Reality Labs</span>
+                        </div>
+                        <div class="is-size-6 publication-authors">
+                            (Work was done during Norman’s and Yawar’s internships at Meta Reality Labs Zurich.)
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="static/AutoRF.pdf"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2204.03593"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- Video Link. -->
+                                <span class="link-block">
+                                    <a href="https://youtu.be/mDcsSK3GaF4"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <svg class="svg-inline--fa fa-youtube fa-w-18" aria-hidden="true"
+                                                focusable="false" data-prefix="fab" data-icon="youtube" role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                                data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
+                                                </path>
+                                            </svg><!-- <i class="fab fa-youtube"></i> Font Awesome fontawesome.com -->
+                                        </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span>
+
+
+                                <!-- Github Link. -->
+                                <!-- <span class="link-block">
+                                    <a class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                <span>Code (coming soon)</span>
+                                </a>
+                                </span> -->
+                                <!-- Dataset Link. -->
+                                <span class="link-block">
+                            </div>
+                        </div>
+    </section>
+
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="hero-body">
+
+                <video id="teaser" autoplay muted loop height="100%">
+                    <source src="static/method/method_cut.mov" type="video/mp4">
+                </video>
+                <script>
+                    var v = document.getElementById("teaser");
+                    v.playbackRate = 1.0;
+
+                </script>
+                <h2 class=" subtitle has-text-centered">
+                    <span class="dnerf">DiffRF</span>
+                </h2>
+
+
+    </section>
+
+
+    <!-- <section class="hero is-light is-small">
+        <div class="hero-body">
+            <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+                    <div class="item item-steve">
+                        <video poster="" id="steve" autoplay controls muted loop height="100%">
+                            <source src="static/nuscenes/3edd8c1ef10b4f4e889e016cb56035e6.mp4" type="video/mp4">
+                        </video>
+                        <img src="static/nuscenes/3edd8c1ef10b4f4e889e016cb56035e6.jpg" />
+                    </div>
+                    <div class="item item-blueshirt">
+                        <video poster="" id="blueshirt" autoplay controls muted loop height="100%">
+                            <source src="static/nuscenes/ec7bb4009f5b42f6b497501b223ba8b2.mp4" type="video/mp4">
+                        </video>
+                        <img src="static/nuscenes/ec7bb4009f5b42f6b497501b223ba8b2.jpg" />
+                    </div>
+                    <div class="item item-fullbody">
+                        <video poster="" id="fullbody" autoplay controls muted loop height="100%">
+                            <source src="static/nuscenes/8166595e053d469ca5fcb0e12b45b068.mp4" type="video/mp4">
+                        </video>
+                        <img src="static/nuscenes/8166595e053d469ca5fcb0e12b45b068.jpg" />
+                    </div>
+                    <div class="item item-shiba">
+                        <video poster="" id="shiba" autoplay controls muted loop height="100%">
+                            <source src="static/nuscenes/82bfca2a2fad4589bce8acee7dd5d794.mp4" type="video/mp4">
+                        </video>
+                        <img src="static/nuscenes/82bfca2a2fad4589bce8acee7dd5d794.jpg" />
+                    </div>
+                    <div class="item item-chair-tp">
+                        <video poster="" id="chair-tp" autoplay controls muted loop height="100%">
+                            <source src="static/nuscenes/9adba99929b5432998dff5aefdfc0178.mp4" type="video/mp4">
+                        </video>
+                        <img src="static/nuscenes/9adba99929b5432998dff5aefdfc0178.jpg" />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We introduce DiffRF, a novel approach for 3D radiance field synthesis based on denoising
+                            diffusion probabilistic models.
+                        </p>
+                        <p>
+                            While existing diffusion-based methods operate on images, latent codes, or point cloud data,
+                            we are the first to directly generate volumetric radiance fields.
+                            To this end, we propose a 3D denoising model which directly operates on an explicit voxel
+                            grid representation.
+                        </p>
+                        <p>
+                            However, as radiance fields generated from a set of posed images can be ambiguous and
+                            contain artifacts, obtaining ground truth radiance field samples is non-trivial.
+                        </p>
+                        <p>
+                            We address this challenge by pairing the denoising formulation with a rendering loss,
+                            enabling our model to learn a deviated prior that favours good image quality instead of
+                            trying to replicate fitting errors like floating artifacts.
+                        </p>
+                        <p>
+                            In contrast to 2D-diffusion models, our model learns multi-view consistent priors, enabling
+                            free-view synthesis and accurate shape generation.
+                            Compared to 3D GANs, our diffusion-based approach naturally enables conditional generation
+                            like masked completion or single-view 3D synthesis at inference time.
+                        </p>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+            <!-- Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Video</h2>
+                    <div class="publication-video">
+                        <iframe src="https://www.youtube.com/embed/mDcsSK3GaF4" title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!--/ Paper video. -->
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <!-- Re-rendering. -->
+            <h3 class="title is-4">Radiance Field Synthesis</h3>
+            <div class="content has-text-justified">
+                <p>
+                    <span class="dnerf">AutoRF</span> naturally disentangles object shape, appearance and pose. This
+                    allows to control each property individually while freely moving the camera leading to the first
+                    ever implicitly reverse-parked car.
+                </p>
+            </div>
+            <div class="colums is-centered">
+                <div class="column">
+                    <div class="content">
+                        <video id="photoshape_uncond" autoplay muted loop>
+                            <source src="static/results/photoshape_res.mov" type="video/mp4">
+                        </video>
+                        <script>
+                            var v = document.getElementById("photoshape_uncond");
+                            v.playbackRate = 1.0;
+
+                        </script>
+                        <h4 class="  has-text-centered">
+                            Unconditional synthesis results on PhotoShape Chairs
+                        </h4>
+
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="content">
+                        <video id="abo_res" autoplay muted loop>
+                            <source src="static/results/abo_res.mov" type="video/mp4">
+                        </video>
+                        <script>
+                            var v = document.getElementById("abo_res");
+                            v.playbackRate = 1.0;
+
+                        </script>
+                        <h4 class="  has-text-centered">
+                            Unconditional synthesis results on ABO Tables
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <!-- Masked completion -->
+            <h3 class="title is-4">3D Masked Completion</h3>
+            <div class="content has-text-justified">
+                <p>
+
+                </p>
+            </div>
+            <div class="content has-text-centered">
+                <img src="static/masking/full_screenshot_vgsh_blerf_0.gif" width="49%" />
+                <video id="masking_examples" autoplay muted loop width="50%">
+                    <source src="static/masking/masking_examples.mov" type="video/mp4">
+                </video>
+                <script>
+                    var v = document.getElementById("masking_examples");
+                    v.playbackRate = 1.0;
+
+                </script>
+
+
+            </div>
+
+            <!-- Image to volume Synthesis -->
+            <h3 class="title is-4">Image-to-Volume Synthesis</h3>
+            <div class="content has-text-justified">
+                <p>
+
+                </p>
+            </div>
+            <div class="content has-text-centered">
+                <video id="real0" autoplay muted loop width="49%">
+                    <source src="static/real/real0.mov" type="video/mp4">
+                </video>
+                <script>
+                    var v = document.getElementById("real0");
+                    v.playbackRate = 1.0;
+
+                </script>
+
+                <video id="real1" autoplay muted loop width="49%">
+                    <source src="static/real/real1.mov" type="video/mp4">
+                </video>
+                <script>
+                    var v = document.getElementById("real1");
+                    v.playbackRate = 1.0;
+
+                </script>
+
+
+            </div>
+
+            <!-- Asset generation -->
+            <h3 class="title is-4">Asset generation for scenes</h3>
+            <div class="content has-text-justified">
+                <p>
+
+                </p>
+            </div>
+            <div class="content has-text-centered">
+                <video id="full_house" autoplay muted loop width="100%">
+                    <source src="static/results/full_house.mp4" type="video/mp4">
+                </video>
+                <script>
+                    var v = document.getElementById("full_house");
+                    v.playbackRate = 1.0;
+
+                </script>
+            </div>
+
+
+
+            <!--/ Animation. -->
+
+
+            <!-- Concurrent Work. -->
+            <div class="columns is-centered">
+                <div class="column is-full-width">
+                    <h2 class="title is-3">Related Links</h2>
+
+                    <div class="content has-text-justified">
+                        <p>
+                            For more work on similar tasks, please check out
+                        </p>
+                        <p>
+                            <a href="https://github.com/facebookresearch/co3d">Common Objects in 3D: Large-Scale
+                                Learning and Evaluation of Real-life 3D Category Reconstruction</a> introduces a new
+                            dataset for training on real 3d-annotated category-centric data.
+                        </p>
+
+                        <p>
+                            <a href="https://formyfamily.github.io/NeROIC/">NeROIC: Neural Object Capture and Rendering
+                                from Online Image Collections</a>, presents another approach for geometry and material
+                            estimation by generalizing from large-scale object-centric data.
+                        </p>
+
+                        <p>
+                            A similar disentanglement of shape and appearance can be found in
+                            <a href="https://sites.google.com/view/wbjang/home/codenerf">CodeNeRF: Disentangled Neural
+                                Radiance Fields for Object Categories</a>
+                        <p>
+                            There are probably many more by the time you are reading this. Check out <a
+                                href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's
+                                curated list of NeRF papers</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Concurrent Work. -->
+
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@inproceedings{mueller2022autorf,
+  author    = {M{\"{u}}ller, Norman and Simonelli, Andrea and Porzi, Lorenzo and Bulò, Samuel Rota and Nie{\ss}ner, Matthias and Kontschieder, Peter}},
+  title     = {AutoRF: Learning 3D Object Radiance Fields from Single View Observations},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  month     = {June},
+  year      = {2022}}</code></pre>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <a class="icon-link" href="static/AutoRF.pdf">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+                <a class="icon-link" href="https://github.com/sirwyver" class="external-link" disabled>
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p style="text-align:center">
+                            Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                                href="https://nerfies.github.io/">Nerfies website</a>.
+                        </p>
+                        <p style="text-align:center">
+                            Please contact <a href="https://niessnerlab.org/members/norman_mueller/profile.html">Norman
+                                Müller</a> for feedback and questions.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
