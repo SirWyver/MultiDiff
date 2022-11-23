@@ -57,7 +57,7 @@
                             </span>
                             <span class="author-block">
                                 <a href="https://niessnerlab.org/members/matthias_niessner/profile.html">Matthias
-                                    Nießner</a><sup>1</sup>,
+                                    Nießner</a><sup>1</sup>
                             </span>
                         </div>
 
@@ -137,7 +137,8 @@
 
                 </script>
                 <h2 class=" subtitle has-text-centered">
-                    <span class="dnerf">DiffRF</span> is a denoising diffusion probabilistic model directly operating on 3D radiance fields and trained with an additional volumetric rendering loss. 
+                    <span class="dnerf">DiffRF</span> is a denoising diffusion probabilistic model directly operating on
+                    3D radiance fields and trained with an additional volumetric rendering loss.
                     This enables learning strong radiance priors with high rendering quality and accurate geometry.
                 </h2>
 
@@ -250,7 +251,8 @@
             <h3 class="title is-4">Radiance Field Synthesis</h3>
             <div class="content has-text-justified">
                 <p>
-                   Our 3D denoising diffusion probabilistic model learns to synthesize diverse radiance fields that enable high-quality rendering with accurate geometry.
+                    Our 3D denoising diffusion probabilistic model learns to synthesize diverse radiance fields that
+                    enable high-quality rendering with accurate geometry.
                 </p>
             </div>
             <div class="colums is-centered">
@@ -295,7 +297,9 @@
 
             <!-- Masked completion -->
             <h3 class="title is-4">3D Masked Completion</h3>
-            <span class="dnerf">DiffRF</span> naturally enables 3D masked completion: Given a 3D mask (of arbitrary shape), the goal is to synthesize a completion of the masked region that harmonizes with the non-masked area.
+            <span class="dnerf">DiffRF</span> naturally enables 3D masked completion: Given a 3D mask (of arbitrary
+            shape), the goal is to synthesize a completion of the masked region that harmonizes with the non-masked
+            area.
             We observe that our model produces diverse and matching completions.
             <div class="content has-text-justified">
                 <p>
@@ -318,7 +322,9 @@
 
             <!-- Image to volume Synthesis -->
             <h3 class="title is-4">Image-to-Volume Synthesis</h3>
-            Given a posed (relative to the 3D bounded box), foreground-segmented image, we can guide the sampling process simultaneously minimizing the photometric rendering error. This leads to plausible radiance field proposals.
+            Given a posed (relative to the 3D bounded box), foreground-segmented image, we can guide the sampling
+            process by simultaneously minimizing the photometric rendering error. This leads to plausible radiance field
+            proposals.
             <div class="content has-text-justified">
                 <p>
 
@@ -350,7 +356,7 @@
             <h3 class="title is-4">Asset generation for scenes</h3>
             <div class="content has-text-justified">
                 <p>
-                    We see future applications of our radiance field diffusion method in the generation of scene assets. 
+                    We see future applications of our radiance field diffusion method in the generation of scene assets where the accurately synthesized geometry can enable physics-based interaction.
                 </p>
             </div>
             <div class="content has-text-centered">
@@ -374,37 +380,29 @@
                 <div class="column is-full-width">
                     <h2 class="title is-3">Related Links</h2>
 
-                    <!-- <div class="content has-text-justified">
+                    <div class="content has-text-justified">
                         <p>
-                            For more work on similar tasks, please check out
+                            For more 3D diffusion-based work, please also check out
                         </p>
                         <p>
-                            <a href="https://github.com/facebookresearch/co3d">Common Objects in 3D: Large-Scale
-                                Learning and Evaluation of Real-life 3D Category Reconstruction</a> introduces a new
-                            dataset for training on real 3d-annotated category-centric data.
+                            <a href="https://dreamfusion3d.github.io/">DreamFusion: Text-to-3D using 2D Diffusion</a>
+                            performs text-guided NeRF generation by 2D Diffusion. They propose Score Distillation Sampling in order to optimize samples via diffusion which could potentially also been applied to other modalities than text.
+                        </p>
+                        <a href="https://nv-tlabs.github.io/LION/">LION: Latent Point Diffusion Models for 3D Shape Generation</a> introduces a hierarchical approach to learn high-quality point cloud synthesis 
+                        that can be augmented with mdoern surface reconstruction techniques to generate smooth 3D meshes.
+                        </p>
+                        
+                        <p>
+                        <a href="hhttps://3d-diffusion.github.io/">Novel View Synthesis with Diffusion Models</a> is an image-to-image diffusion model that enables novel view image synthesis from a single input image. 
                         </p>
 
-                        <p>
-                            <a href="https://formyfamily.github.io/NeROIC/">NeROIC: Neural Object Capture and Rendering
-                                from Online Image Collections</a>, presents another approach for geometry and material
-                            estimation by generalizing from large-scale object-centric data.
-                        </p>
 
-                        <p>
-                            A similar disentanglement of shape and appearance can be found in
-                            <a href="https://sites.google.com/view/wbjang/home/codenerf">CodeNeRF: Disentangled Neural
-                                Radiance Fields for Object Categories</a>
-                        <p>
-                            There are probably many more by the time you are reading this. Check out <a
-                                href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's
-                                curated list of NeRF papers</a>.
-                        </p>
-                    </div> -->
+                        
+
+                    </div>
                 </div>
-            </div>
-            <!--/ Concurrent Work. -->
 
-        </div>
+            </div>
     </section>
 
 
