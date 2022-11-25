@@ -195,33 +195,21 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        <p>
                             We introduce DiffRF, a novel approach for 3D radiance field synthesis based on denoising
                             diffusion probabilistic models.
-                        </p>
-                        <p>
                             While existing diffusion-based methods operate on images, latent codes, or point cloud data,
                             we are the first to directly generate volumetric radiance fields.
                             To this end, we propose a 3D denoising model which directly operates on an explicit voxel
                             grid representation.
-                        </p>
-                        <p>
                             However, as radiance fields generated from a set of posed images can be ambiguous and
                             contain artifacts, obtaining ground truth radiance field samples is non-trivial.
-                        </p>
-                        <p>
                             We address this challenge by pairing the denoising formulation with a rendering loss,
                             enabling our model to learn a deviated prior that favours good image quality instead of
                             trying to replicate fitting errors like floating artifacts.
-                        </p>
-                        <p>
                             In contrast to 2D-diffusion models, our model learns multi-view consistent priors, enabling
                             free-view synthesis and accurate shape generation.
                             Compared to 3D GANs, our diffusion-based approach naturally enables conditional generation
                             like masked completion or single-view 3D synthesis at inference time.
-                        </p>
-                        <p>
-                        </p>
                     </div>
                 </div>
             </div>
