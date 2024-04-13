@@ -34,48 +34,46 @@
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title">DiffRF: Rendering-guided 3D Radiance Field Diffusion
+                        <h1 class="title is-1 publication-title">MultiDiff: Consistent Novel View Synthesis from a Single Image
                         </h1>
-                        <h2 class="is-size-3">CVPR 2023 Highlight
+                        <h2 class="is-size-3">CVPR 2024
                         </h2>
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">
-                                <a href="https://niessnerlab.org/members/norman_mueller/profile.html">Norman
-                                    Müller</a><sup>1,2</sup>,</span>
+                                <a href="https://sirwyver.github.io">Norman
+                                    Müller</a><sup>1</sup>,</span>
                             <span class="author-block">
-                                <a href="https://niessnerlab.org/members/yawar_siddiqui/profile.html">Yawar
-                                    Siddiqui</a><sup>1,2</sup>,</span>
+                                <a href="https://katjaschwarz.github.io">Katja Schwarz</a><sup>1</sup>,</span>
+                            <span class="author-block">
+                                <a href="https://barbararoessle.github.io/">Barbara Roessle</a><sup>2</sup>,
+                            </span>
                             <span class="author-block">
                                 <a href="https://scholar.google.com/citations?user=vW1gaVEAAAAJ">Lorenzo
-                                    Porzi</a><sup>2</sup>,
+                                    Porzi</a><sup>1</sup>,
                             </span>
                             <span class="author-block">
                                 <a href="https://scholar.google.com/citations?hl=de&user=484sccEAAAAJ">Samuel Rota
-                                    Bulò</a><sup>2</sup>,
-                            </span>
-                            <span class="author-block">
-                                <a href="https://scholar.google.com/citations?user=CxbDDRMAAAAJ&hl=en">Peter
-                                    Kontschieder</a><sup>2</sup>,
+                                    Bulò</a><sup>1</sup>,
                             </span>
                             <span class="author-block">
                                 <a href="https://niessnerlab.org/members/matthias_niessner/profile.html">Matthias
-                                    Nießner</a><sup>1</sup>
+                                    Nießner</a><sup>2</sup>
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=CxbDDRMAAAAJ&hl=en">Peter
+                                    Kontschieder</a><sup>1</sup>,
                             </span>
                         </div>
 
                         <div class="is-size-5 publication-authors">
-                            <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
-                            <span class="author-block"><sup>2</sup>Meta Reality Labs</span>
+                            <span class="author-block"><sup>1</sup>Meta Reality Labs</span>
+                            <span class="author-block"><sup>2</sup>Technical University of Munich,</span>
                         </div>
-                        <div class="is-size-6 publication-authors">
-                            (Work was done during Norman’s and Yawar’s internships at Meta Reality Labs Zurich as well as at TUM.)
-                        </div>
-
                         <div class="column has-text-centered">
                             <div class="publication-links">
                                 <!-- PDF Link. -->
                                 <span class="link-block">
-                                    <a href="static/assets/DiffRF.pdf"
+                                    <a href="static/assets/MultiDiff.pdf"
                                         class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
                                             <i class="fas fa-file-pdf"></i>
@@ -124,9 +122,6 @@
                                 <span class="link-block">
                             </div>
                         </div>
-                        <div class="is-size-7 publication-authors">
-                            (Version update, initial version contained a data mapping error causing all methods being trained/evaluated on a subset)
-                        </div>
     </section>
 
     <section class="hero teaser">
@@ -134,7 +129,7 @@
             <div class="hero-body">
 
                 <video id="teaser" autoplay muted loop height="100%">
-                    <source src="static/method/method_cut.mov" type="video/mp4">
+                    <source src="static/method/multidiff_teaser_vid.mp4" type="video/mp4">
                 </video>
                 <script>
                     var v = document.getElementById("teaser");
@@ -142,8 +137,7 @@
 
                 </script>
                 <h2 class=" subtitle has-text-centered">
-                    <span class="dnerf">DiffRF</span> is a denoising diffusion probabilistic model directly operating on 3D radiance fields and trained with an additional volumetric rendering loss. This enables learning
-                                strong radiance priors with high rendering quality and accurate geometry.
+                    <span class="dnerf">MultiDiff</span> leverages strong depth and video diffusion priors to enable consistent novel view synthesis of scenes from a single RGB image.
                                 </h2>
 
 
@@ -199,11 +193,13 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        We introduce DiffRF, a novel approach for 3D radiance field synthesis based on denoising diffusion probabilistic models. While existing diffusion-based methods operate on images, latent codes, or point cloud data, we are the first to directly generate
-                        volumetric radiance fields. To this end, we propose a 3D denoising model which directly operates on an explicit voxel grid representation. However, as radiance fields generated from a set of posed images can be ambiguous and contain
-                        artifacts, obtaining ground truth radiance field samples is non-trivial. We address this challenge by pairing the denoising formulation with a rendering loss, enabling our model to learn a deviated prior that favours good image
-                        quality instead of trying to replicate fitting errors like floating artifacts. In contrast to 2D-diffusion models, our model learns multi-view consistent priors, enabling free-view synthesis and accurate shape generation. Compared
-                        to 3D GANs, our diffusion-based approach naturally enables conditional generation like masked completion or single-view 3D synthesis at inference time.
+                        We introduce MultiDiff, a novel approach for consistent novel view synthesis of scenes from a single RGB image. 
+                        The task of synthesizing novel views from a single reference image is highly ill-posed by nature, as there exist multiple, plausible explanations for unobserved areas.
+                        To address this issue, we incorporate strong priors in form of monocular depth predictors and video-diffusion models. Monocular depth enables us to condition our model on warped reference images for the target views, increasing geometric stability. The video-diffusion prior provides a strong proxy for 3D scenes, allowing the model to learn continuous and pixel-accurate correspondences across generated images.
+                        In contrast to approaches relying on autoregressive image generation that are prone to drifts and error accumulation, MultiDiff jointly synthesizes a sequence of frames yielding high-quality and multi-view consistent results -- even for long-term scene generation with large camera movements, while reducing inference time by an order of magnitude.
+                        For additional consistency and image quality improvements, we introduce a novel, structured noise distribution. 
+                        Our experimental results demonstrate that MultiDiff outperforms state-of-the-art methods on the challenging, real-world datasets RealEstate10K and ScanNet.
+                        Finally, our model naturally supports multi-view consistent editing without the need for further tuning. 
                     </div>
                 </div>
             </div>
@@ -222,176 +218,10 @@
     </section>
 
 
-    <section class="section">
-        <div class="container is-max-desktop">
-
-            <!-- Re-rendering. -->
-            <h3 class="title is-4">Radiance Field Synthesis</h3>
-            <div class="content has-text-justified">
-                <p>
-                    Our 3D denoising diffusion probabilistic model learns to synthesize diverse radiance fields that enable high-quality rendering with accurate geometry.
-                </p>
-            </div>
-            <div class="colums is-centered">
-                <div class="column">
-                    <div class="content">
-                        <video id="photoshape_uncond" autoplay muted loop>
-                            <source src="static/results/photoshape_res.mov" type="video/mp4">
-                        </video>
-                        <script>
-                            var v = document.getElementById("photoshape_uncond");
-                            v.playbackRate = 1.0;
-                        </script>
-                        <h4 class="  has-text-centered">
-                            Unconditional synthesis results on PhotoShape Chairs
-                        </h4>
-
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="content">
-                        <video id="abo_res" autoplay muted loop>
-                            <source src="static/results/abo_res.mov" type="video/mp4">
-                        </video>
-                        <script>
-                            var v = document.getElementById("abo_res");
-                            v.playbackRate = 1.0;
-                        </script>
-                        <h4 class="  has-text-centered">
-                            Unconditional synthesis results on ABO Tables
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="section">
-        <div class="container is-max-desktop">
-
-            <!-- Masked completion -->
-            <h3 class="title is-4">3D Masked Completion</h3>
-            <span class="dnerf">DiffRF</span> naturally enables 3D masked completion: Given a 3D mask (of arbitrary shape), the goal is to synthesize a completion of the masked region that harmonizes with the non-masked area. We observe that our model
-            produces diverse and matching completions.
-            <div class="content has-text-justified">
-                <p>
-
-                </p>
-            </div>
-            <div class="content has-text-centered">
-                <img src="static/masking/full_screenshot_vgsh_blerf_0.gif" width="49%" />
-                <video id="masking_examples" autoplay muted loop width="50%">
-                    <source src="static/masking/masking_examples.mov" type="video/mp4">
-                </video>
-                <script>
-                    var v = document.getElementById("masking_examples");
-                    v.playbackRate = 1.0;
-                </script>
-
-
-            </div>
-
-            <!-- Image to volume Synthesis -->
-            <h3 class="title is-4">Image-to-Volume Synthesis</h3>
-            Given a posed (relative to the 3D bounded box), foreground-segmented image, we can guide the sampling process by simultaneously minimizing the photometric rendering error. This leads to plausible radiance field proposals.
-            <div class="content has-text-justified">
-                <p>
-
-                </p>
-            </div>
-            <div class="content has-text-centered">
-                <video id="real0" autoplay muted loop width="90%">
-                    <source src="static/real/real0.mov" type="video/mp4">
-                </video>
-                <script>
-                    var v = document.getElementById("real0");
-                    v.playbackRate = 1.0;
-                </script>
-
-                <video id="real1" autoplay muted loop width="90%">
-                    <source src="static/real/real1.mov" type="video/mp4">
-                </video>
-                <script>
-                    var v = document.getElementById("real1");
-                    v.playbackRate = 1.0;
-                </script>
-
-
-            </div>
-
-            <!-- Asset generation -->
-            <h3 class="title is-4">Asset generation for scenes</h3>
-            <div class="content has-text-justified">
-                <p>
-                    We see future applications of our radiance field diffusion method in the generation of scene assets where the accurately synthesized geometry can enable physics-based interaction.
-                </p>
-            </div>
-            <div class="content has-text-centered">
-                <video id="full_house" autoplay muted loop width="100%">
-                    <source src="static/results/full_house.mp4" type="video/mp4">
-                </video>
-                <script>
-                    var v = document.getElementById("full_house");
-                    v.playbackRate = 1.0;
-                </script>
-            </div>
-
-
-
-            <!--/ Animation. -->
-
-
-            <!-- Concurrent Work. -->
-            <div class="columns is-centered">
-                <div class="column is-full-width">
-                    <h2 class="title is-3">Related Links</h2>
-
-                    <div class="content has-text-justified">
-                        <p>
-                            For some more 3D diffusion-based work, please also check out
-                        </p>
-                        <p>
-                            <a href="https://dreamfusion3d.github.io/">DreamFusion: Text-to-3D using 2D Diffusion</a> performs text-guided NeRF generation by 2D Diffusion. They propose Score Distillation Sampling in order to optimize samples via diffusion
-                            which could potentially also been applied to other modalities than text.
-                        </p>
-                        <a href="https://nv-tlabs.github.io/LION/">LION: Latent Point Diffusion Models for 3D Shape Generation</a> introduces a hierarchical approach to learn high-quality point cloud synthesis that can be augmented with mdoern surface
-                        reconstruction techniques to generate smooth 3D meshes.
-                        </p>
-                        <p>
-                            <a href="https://video-diffusion.github.io/">Video Diffusion Models</a> With the third dimension as time, this paper propose a natural extension of image architectures to tackle the task of video diffusion. They introduce a
-                            novel conditioning technique for long and high-resolution videos and achieve state-of-the-art results on unconditional video generation.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-    </section>
-
-
-    <section class="section" id="BibTeX">
-        <div class="container is-max-desktop content">
-            <h2 class="title">BibTeX</h2>
-            <pre><code>@inproceedings{muller2023diffrf,
-  title={Diffrf: Rendering-guided 3d radiance field diffusion},
-  author={M{\"u}ller, Norman and Siddiqui, Yawar and Porzi, Lorenzo and Bulo, Samuel Rota and Kontschieder, Peter and Nie{\ss}ner, Matthias},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={4328--4338},
-  year={2023}
-}
-            </code>
-        </pre>
-        </div>
-    </section>
-
-
-
-
-
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <a class="icon-link" href="static/assets/DiffRF.pdf">
+                <a class="icon-link" href="static/assets/MultiDiff.pdf">
                     <i class="fas fa-file-pdf"></i>
                 </a>
                 <a class="icon-link" href="https://github.com/sirwyver" class="external-link" disabled>
