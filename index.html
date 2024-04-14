@@ -6,7 +6,7 @@
     <meta name="description" content="Rendering-guided 3D Radiance Field Diffusion">
     <meta name="keywords" content="DiffRF, Diffusion, 3D, Radiance Fields, NeRF, 3D Object">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DiffRF: Rendering-guided 3D Radiance Field Diffusion</title>
+    <title>MultiDiff: Consistent Novel View Synthesis from a Single Image</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -34,7 +34,8 @@
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-                        <h1 class="title is-1 publication-title">MultiDiff: Consistent Novel View Synthesis from a Single Image
+                        <h1 class="title is-1 publication-title">MultiDiff: Consistent Novel View Synthesis from a
+                            Single Image
                         </h1>
                         <h2 class="is-size-3">CVPR 2024
                         </h2>
@@ -78,8 +79,8 @@
                                         <span class="icon">
                                             <i class="fas fa-file-pdf"></i>
                                         </span>
-                                <span>Paper</span>
-                                </a>
+                                        <span>Paper</span>
+                                    </a>
                                 </span>
                                 <span class="link-block">
                                     <a href="https://arxiv.org/abs/2212.01206"
@@ -87,11 +88,11 @@
                                         <span class="icon">
                                             <i class="ai ai-arxiv"></i>
                                         </span>
-                                <span>arXiv</span>
-                                </a>
+                                        <span>arXiv</span>
+                                    </a>
                                 </span>
                                 <!-- Video Link. -->
-                                <span class="link-block">
+                                <!-- <span class="link-block">
                                     <a href="https://youtu.be/qETBcLu8SUk"
                                         class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">
@@ -102,11 +103,16 @@
                                                 <path fill="currentColor"
                                                     d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
                                                 </path>
-                                            </svg><!-- <i class="fab fa-youtube"></i> Font Awesome fontawesome.com -->
+                                            </svg>
                                         </span>
-                                <span>Video</span>
-                                </a>
-                                </span>
+                                        <span>Video</span>
+                                    </a>
+                                </span> -->
+                                <!-- <span class="link-block">
+                                    <video id="teaser" height="100%">
+                                        <source src="static/method/MultiDiff_CR.mov" type="video/mp4">
+                                    </video>
+                                </span> -->
 
 
                                 <!-- Github Link. -->
@@ -133,15 +139,18 @@
                 </video>
                 <script>
                     var v = document.getElementById("teaser");
-                    v.playbackRate = 1.0;
+                    v.playbackRate = 1.5;
 
                 </script>
                 <h2 class=" subtitle has-text-centered">
-                    <span class="dnerf">MultiDiff</span> leverages strong depth and video diffusion priors to enable consistent novel view synthesis of scenes from a single RGB image.
-                                </h2>
+                    <span class="dnerf">MultiDiff</span> enables camera-motion control for scene-level novel view synthesis. 
+                    Given a single RGB image and a camera trajectory of choice, the model generates 3D-consistent views extrapolating from the input image. 
+                </h2>
 
 
     </section>
+
+
 
 
     <!-- <section class="hero is-light is-small">
@@ -193,13 +202,25 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
-                        We introduce MultiDiff, a novel approach for consistent novel view synthesis of scenes from a single RGB image. 
-                        The task of synthesizing novel views from a single reference image is highly ill-posed by nature, as there exist multiple, plausible explanations for unobserved areas.
-                        To address this issue, we incorporate strong priors in form of monocular depth predictors and video-diffusion models. Monocular depth enables us to condition our model on warped reference images for the target views, increasing geometric stability. The video-diffusion prior provides a strong proxy for 3D scenes, allowing the model to learn continuous and pixel-accurate correspondences across generated images.
-                        In contrast to approaches relying on autoregressive image generation that are prone to drifts and error accumulation, MultiDiff jointly synthesizes a sequence of frames yielding high-quality and multi-view consistent results -- even for long-term scene generation with large camera movements, while reducing inference time by an order of magnitude.
-                        For additional consistency and image quality improvements, we introduce a novel, structured noise distribution. 
-                        Our experimental results demonstrate that MultiDiff outperforms state-of-the-art methods on the challenging, real-world datasets RealEstate10K and ScanNet.
-                        Finally, our model naturally supports multi-view consistent editing without the need for further tuning. 
+                        We introduce MultiDiff, a novel approach for consistent novel view synthesis of scenes from a
+                        single RGB image.
+                        The task of synthesizing novel views from a single reference image is highly ill-posed by
+                        nature, as there exist multiple, plausible explanations for unobserved areas.
+                        To address this issue, we incorporate strong priors in form of monocular depth predictors and
+                        video-diffusion models. Monocular depth enables us to condition our model on warped reference
+                        images for the target views, increasing geometric stability. The video-diffusion prior provides
+                        a strong proxy for 3D scenes, allowing the model to learn continuous and pixel-accurate
+                        correspondences across generated images.
+                        In contrast to approaches relying on autoregressive image generation that are prone to drifts
+                        and error accumulation, MultiDiff jointly synthesizes a sequence of frames yielding high-quality
+                        and multi-view consistent results -- even for long-term scene generation with large camera
+                        movements, while reducing inference time by an order of magnitude.
+                        For additional consistency and image quality improvements, we introduce a novel, structured
+                        noise distribution.
+                        Our experimental results demonstrate that MultiDiff outperforms state-of-the-art methods on the
+                        challenging, real-world datasets RealEstate10K and ScanNet.
+                        Finally, our model naturally supports multi-view consistent editing without the need for further
+                        tuning.
                     </div>
                 </div>
             </div>
@@ -209,13 +230,134 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Video</h2>
                     <div class="publication-video">
-                        <iframe src="https://www.youtube.com/embed/qETBcLu8SUk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="static/method/MultiDiff_CR.mov" title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
             <!--/ Paper video. -->
         </div>
     </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Method</h2>
+
+            <div class="content has-text-justified">
+                <p>
+                    <span class="dnerf">MultiDiff</span> leverages strong depth and video diffusion priors to enable
+                        consistent novel view synthesis of scenes from a single RGB image using a novel correspondence attention layer.
+                </p>
+            </div>
+
+                    <video id="method" autoplay muted loop height="100%">
+                        <source src="static/method/method_cut.mp4" type="video/mp4">
+                    </video>
+                    <script>
+                        var v = document.getElementById("method");
+                        v.playbackRate = 8.0;
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <!-- Re-rendering. -->
+            <div class="colums is-centered">
+                <div class="column">
+                    <div class="content">
+                        <video id="results" autoplay muted loop>
+                            <source src="static/results/comparisons_cut.mp4" type="video/mp4">
+                        </video>
+                        <script>
+                            var v = document.getElementById("results");
+                            v.playbackRate = 1.3;
+                        </script>
+                        <h4 class="  has-text-centered">
+                            Novel-view rendering results following the GT trajectory.
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <!-- Re-rendering. -->
+            <div class="colums is-centered">
+                <div class="column">
+                    <div class="content">
+                        <video id="results" autoplay muted loop>
+                            <source src="static/method/noise_warping.mp4" type="video/mp4">
+                        </video>
+                        <script>
+                            var v = document.getElementById("results");
+                            v.playbackRate = 1.3;
+                        </script>
+                        
+                        <h4 class="  has-text-centered">
+                           By warping the initial noise according to the estimated depth into the target novel views, we can structure the noise providing additional information about the 3D scene structure. 
+                           Just like Neo in "The Matrix", the model can decode this abstract noise pattern in more consistent views.
+                        </h4>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container is-max-desktop">
+
+            <!-- Re-rendering. -->
+            <div class="colums is-centered">
+                <div class="column">
+                    <div class="content">
+                        <video id="results" autoplay muted loop>
+                            <source src="static/results/editing.mp4" type="video/mp4">
+                        </video>
+                        <script>
+                            var v = document.getElementById("results");
+                            v.playbackRate = 1.3;
+                        </script>
+
+                        <h4 class="  has-text-centered">
+                            By masking areas in the input image,  <span class="dnerf">MultiDiff</span> naturally enables consistent editing without the need for finetuning. 
+                        </h4>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@inproceedings{muller2024multidiff,
+  title={MultiDiff: Consistent Novel View Synthesis from a Single Image},
+  author={M{\"u}ller, Norman and Schwarz, Katja and Roessle, Barabra and Porzi, Lorenzo and Bulo, Samuel Rota  and Nie{\ss}ner, Matthias and Kontschieder, Peter},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2024}
+}
+            </code>
+        </pre>
+        </div>
+    </section>
+
 
 
     <footer class="footer">
@@ -232,10 +374,11 @@
                 <div class="column is-8">
                     <div class="content">
                         <p style="text-align:center">
-                            Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a href="https://nerfies.github.io/">Nerfies website</a>.
+                            Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                                href="https://nerfies.github.io/">Nerfies website</a>.
                         </p>
                         <p style="text-align:center">
-                            Please contact <a href="https://niessnerlab.org/members/norman_mueller/profile.html">Norman
+                            Please contact <a href="https://sirwyver.github.io/">Norman
                                 Müller</a> for feedback and questions.
                         </p>
 
